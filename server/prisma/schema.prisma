@@ -1,0 +1,51 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Manifestacao {
+  id               String  @id @default(uuid())
+  protocol         String  @unique
+  tipo             String
+  status           String
+  nome             String?
+  whatsapp         String?
+  email            String?
+  unidade          String
+  data             String
+  dataRegistro     String
+  descricao        String  @db.Text
+  tentouContato    String
+  respostaRecebida String  @db.Text
+  resposta         String? @db.Text
+  dataResposta     String?
+  anexos           Anexo[]
+}
+
+model Usuario {
+  id    String @id @default(uuid())
+  login String @unique
+  senha String
+  nome  String
+}
+
+model Unidade {
+  id     String @id @default(uuid())
+  nome   String @unique
+  status String @default("ativo")
+}
+
+model Anexo {
+  id             String       @id @default(uuid())
+  nomeOriginal   String
+  nomeArquivo    String
+  caminho        String
+  tamanho        Int
+  origem         String       @default("cidadao")
+  manifestacaoId String
+  manifestacao   Manifestacao @relation(fields: [manifestacaoId], references: [id], onDelete: Cascade)
+}

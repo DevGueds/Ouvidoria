@@ -1,0 +1,10 @@
+{
+  "description": "Facilitates health department feedback management by allowing users to submit complaints, suggestions, and praises while tracking their submissions.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
